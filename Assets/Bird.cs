@@ -21,8 +21,6 @@ public class Bird : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             isFly = true;
-            Debug.Log(transform.rotation);
-            Debug.Log(velocity.y);
         }
 	}
 
@@ -33,7 +31,6 @@ public class Bird : MonoBehaviour {
         if (isFly)
         {
             isFly = false;
-
             velocity = flyVelocity;
         }
 
@@ -47,4 +44,14 @@ public class Bird : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("AA");
+        if (other.tag.CompareTo("pipe") == 0)
+        {
+            Debug.Log("die");
+        }
+    }
+
 }

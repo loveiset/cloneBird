@@ -47,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Bird.cs" />
-     <Compile Include="Assets\Wall.cs" />
-     <Compile Include="Assets\WallManager.cs" />
+     <Compile Include="Assets\Ground.cs" />
+     <Compile Include="Assets\Pipes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
