@@ -8,6 +8,8 @@ public class Bird : MonoBehaviour {
     public float maxSpeed = 20f;
     bool isFly = false;
     public AudioClip success;
+    public Animator bird;
+    bool start = false;
     
 
 	// Use this for initialization
@@ -21,28 +23,37 @@ public class Bird : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
+            start = true;
+
             isFly = true;
         }
 	}
 
     void FixedUpdate()
     {
-        velocity += gravity * Time.deltaTime;
-        transform.position += velocity * Time.deltaTime;
-        if (isFly)
+        if (Input.GetMouseButtonDown(0))
         {
-            isFly = false;
-            velocity = flyVelocity;
+            bird.SetTrigger("start");
+            return;
         }
+            velocity += gravity * Time.deltaTime;
+            transform.position += velocity * Time.deltaTime;
+            if (isFly)
+            {
+                isFly = false;
+                velocity = flyVelocity;
+                Debug.Log(transform.position.y);
+            }
 
-        //velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+            //velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
-        float angle = 10;
-        if (velocity.y < -1f)
-        {
-            angle = Mathf.Lerp(10, -90, -velocity.y / 10);
-        }
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+            float angle = 10;
+            if (velocity.y < -1f)
+            {
+                angle = Mathf.Lerp(10, -90, -velocity.y / 10);
+            }
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        
 
     }
 
