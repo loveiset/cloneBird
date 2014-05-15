@@ -5,8 +5,9 @@ public class Bird : MonoBehaviour {
     Vector3 velocity = Vector3.zero;
     public Vector3 gravity = Vector3.zero;
     public Vector3 flyVelocity = Vector3.zero;
-    public float maxSpeed = 5f;
+    public float maxSpeed = 20f;
     bool isFly = false;
+    public AudioClip success;
     
 
 	// Use this for initialization
@@ -34,12 +35,12 @@ public class Bird : MonoBehaviour {
             velocity = flyVelocity;
         }
 
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+        //velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
         float angle = 10;
         if (velocity.y < -1f)
         {
-            angle = Mathf.Lerp(10, -90, -velocity.y / maxSpeed);
+            angle = Mathf.Lerp(10, -90, -velocity.y / 10);
         }
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
@@ -47,10 +48,18 @@ public class Bird : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("AA");
-        if (other.tag.CompareTo("pipe") == 0)
+        if (other.gameObject.tag.CompareTo("pipe") == 0)
         {
             Debug.Log("die");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag.CompareTo("gap") == 0)
+        {
+            Debug.Log("success");
+            audio.PlayOneShot(success);
         }
     }
 
