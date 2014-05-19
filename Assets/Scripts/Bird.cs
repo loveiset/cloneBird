@@ -63,6 +63,7 @@ public class Bird : MonoBehaviour {
         if (other.gameObject.tag.CompareTo("pipe") == 0)
         {
             Debug.Log("die");
+            Application.LoadLevel(Application.loadedLevel);
         }
     }
 
