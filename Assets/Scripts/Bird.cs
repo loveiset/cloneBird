@@ -31,11 +31,10 @@ public class Bird : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (start)
         {
             bird.SetTrigger("start");
-            return;
-        }
+
             velocity += gravity * Time.deltaTime;
             transform.position += velocity * Time.deltaTime;
             if (isFly)
@@ -44,6 +43,7 @@ public class Bird : MonoBehaviour {
                 velocity = flyVelocity;
                 Debug.Log(transform.position.y);
             }
+            Debug.Log(transform.position.x);
 
             //velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
@@ -51,10 +51,11 @@ public class Bird : MonoBehaviour {
             if (velocity.y < -1f)
             {
                 angle = Mathf.Lerp(10, -90, -velocity.y / 10);
+                Debug.Log(angle);
             }
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        
+            transform.localRotation = Quaternion.Euler(0,0,angle);
 
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
