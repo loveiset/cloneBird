@@ -24,7 +24,7 @@ public class Bird : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             start = true;
-
+            BirdAni.die = false;
             isFly = true;
         }
 	}
@@ -41,38 +41,25 @@ public class Bird : MonoBehaviour {
             {
                 isFly = false;
                 velocity = flyVelocity;
-                Debug.Log(transform.position.y);
+                //Debug.Log(transform.position.y);
             }
-            Debug.Log(transform.position.x);
+            //Debug.Log(transform.position.x);
 
-            //velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+            velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
             float angle = 10;
             if (velocity.y < -1f)
             {
                 angle = Mathf.Lerp(10, -90, -velocity.y / 10);
-                Debug.Log(angle);
+                //Debug.Log(angle);
             }
             transform.localRotation = Quaternion.Euler(0,0,angle);
 
         }
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag.CompareTo("pipe") == 0)
+        if (BirdAni.die)
         {
-            Debug.Log("die");
-            Application.LoadLevel(Application.loadedLevel);
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag.CompareTo("gap") == 0)
-        {
-            Debug.Log("success");
-            audio.PlayOneShot(success);
+            velocity = Vector3.zero;
+            bird.SetTrigger("die");
         }
     }
 
