@@ -50,7 +50,7 @@ public class Bird : MonoBehaviour {
             velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
             float angle = 10;
-            if (velocity.y < -1f)
+            if (velocity.y < -3f)
             {
                 angle = Mathf.Lerp(10, -90, -velocity.y / 10);
                 //Debug.Log(angle);
