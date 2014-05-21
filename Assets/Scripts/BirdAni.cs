@@ -3,11 +3,13 @@ using System.Collections;
 
 public class BirdAni : MonoBehaviour {
     public static bool die = false;
+    public GameObject scoreObject;
+    Score score;
 
 	// Use this for initialization
 	void Start () {
         die = false;
-	
+        score = scoreObject.GetComponent<Score>();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +32,7 @@ public class BirdAni : MonoBehaviour {
         if (other.gameObject.tag.CompareTo("gap") == 0)
         {
             Debug.Log("success");
+            score.ShowScore();
             //audio.PlayOneShot(success);
         }
     }

@@ -10,6 +10,8 @@ public class Bird : MonoBehaviour {
     public AudioClip success;
     public Animator bird;
     bool start = false;
+
+    //public GameObject score;
     
 
 	// Use this for initialization
