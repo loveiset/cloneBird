@@ -10,7 +10,7 @@ public class Score : MonoBehaviour {
     Sprite[] scorePic;
     [SerializeField]
     GameObject[] scorePosition;
-    SpriteRenderer[] showSprites = new SpriteRenderer[3];
+    SpriteRenderer[] showSprites = new SpriteRenderer[4];
 
 	// Use this for initialization
 	void Start () 

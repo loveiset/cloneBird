@@ -7,7 +7,6 @@ public class Bird : MonoBehaviour {
     public Vector3 flyVelocity = Vector3.zero;
     public float maxSpeed = 20f;
     bool isFly = false;
-    public AudioClip success;
     public Animator bird;
     bool start = false;
 

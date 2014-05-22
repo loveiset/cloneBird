@@ -5,6 +5,7 @@ public class BirdAni : MonoBehaviour {
     public static bool die = false;
     public GameObject scoreObject;
     Score score;
+    public AudioClip success;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,7 @@ public class BirdAni : MonoBehaviour {
         {
             Debug.Log("success");
             score.ShowScore();
-            //audio.PlayOneShot(success);
+            audio.PlayOneShot(success);
         }
     }
 
