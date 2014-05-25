@@ -8,9 +8,8 @@ public class Bird : MonoBehaviour {
     public float maxSpeed = 20f;
     bool isFly = false;
     public Animator bird;
-    bool start = false;
 
-    //public GameObject score;
+    public GameManager gmr;
     
 
 	// Use this for initialization
@@ -24,44 +23,39 @@ public class Bird : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            start = true;
-            BirdAni.die = false;
             isFly = true;
         }
 	}
 
     void FixedUpdate()
     {
-        if (start)
+        if (gmr.isStart)
         {
             bird.SetTrigger("start");
+            if (gmr.die)
+            {
+                bird.SetTrigger("die");
+            }
 
             velocity += gravity * Time.deltaTime;
             transform.position += velocity * Time.deltaTime;
-            if (isFly)
+            if (isFly && gmr.die != true)
             {
                 isFly = false;
                 velocity = flyVelocity;
-                //Debug.Log(transform.position.y);
             }
-            //Debug.Log(transform.position.x);
 
             velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
             float angle = 10;
             if (velocity.y < -3f)
             {
-                angle = Mathf.Lerp(10, -90, -velocity.y / 10);
+                angle = Mathf.Lerp(10, -90, -(3 + velocity.y) / 10);
                 //Debug.Log(angle);
             }
-            transform.localRotation = Quaternion.Euler(0,0,angle);
-
-        }
-        if (BirdAni.die)
-        {
-            velocity = Vector3.zero;
-            bird.SetTrigger("die");
+            transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
     }
+    
 
 }

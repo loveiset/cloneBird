@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
+    public bool isStart = false;
+    public bool runInToPipe = false;
+    public bool runInToRoad = false;
+    public bool die = false;
 
 	// Use this for initialization
 	void Start () {
@@ -9,7 +13,11 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+    {
+        if (Input.GetMouseButton(0))
+        {
+            isStart = true;
+        }
 	}
 }

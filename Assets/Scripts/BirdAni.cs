@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class BirdAni : MonoBehaviour {
-    public static bool die = false;
+    public GameManager gmr;
     public GameObject scoreObject;
     Score score;
     public AudioClip success;
 
 	// Use this for initialization
 	void Start () {
-        die = false;
         score = scoreObject.GetComponent<Score>();
 	}
 	
@@ -23,8 +22,7 @@ public class BirdAni : MonoBehaviour {
         if (other.gameObject.tag.CompareTo("pipe") == 0)
         {
             Debug.Log("die");
-            die = true;
-            //Application.LoadLevel(Application.loadedLevel);
+            gmr.die = true;
         }
     }
 
@@ -40,7 +38,7 @@ public class BirdAni : MonoBehaviour {
 
     void OnGUI()
     {
-        if (die)
+        if (gmr.die==true)
         {
             if (GUI.Button(new Rect(50, 50, 100, 50), "play again"))
             {

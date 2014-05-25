@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Pipes : MonoBehaviour {
     public Vector3 velocity = Vector3.zero;
+    public GameManager gmr;
 
 	// Use this for initialization
 	void Start () 
@@ -20,13 +21,16 @@ public class Pipes : MonoBehaviour {
 
     void FixedUpdate()
     {
-        transform.position += velocity*Time.deltaTime;
-        if (transform.position.x <= -5.1f)
+        if (gmr.isStart)
         {
-            Vector3 pos = transform.position;
-            pos.x = 9.9f;
-            pos.y = Random.Range(4.3f, 9.9f);
-            transform.position = pos;
+            transform.position += velocity * Time.deltaTime;
+            if (transform.position.x <= -5.1f)
+            {
+                Vector3 pos = transform.position;
+                pos.x = 9.9f;
+                pos.y = Random.Range(4.3f, 9.9f);
+                transform.position = pos;
+            }
         }
     }
 }
