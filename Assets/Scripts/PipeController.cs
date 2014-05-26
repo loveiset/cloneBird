@@ -21,7 +21,14 @@ public class PipeController : MonoBehaviour {
     {
         if (gmr.isStart == true)
         {
-            Debug.Log("start");
+            if (gmr.die == true)
+            {
+                for (int i = 0; i < pipes.Length; i++)
+                {
+                    pipes[i].GetComponent<Pipes>().enabled = false;
+                }
+                return;
+            }
             for (int i = 0; i < pipes.Length; i++)
             {
                 pipes[i].GetComponent<Pipes>().enabled = true;

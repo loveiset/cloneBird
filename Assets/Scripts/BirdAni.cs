@@ -21,7 +21,6 @@ public class BirdAni : MonoBehaviour {
     {
         if (other.gameObject.tag.CompareTo("pipe") == 0)
         {
-            Debug.Log("die");
             gmr.die = true;
         }
     }
@@ -33,6 +32,15 @@ public class BirdAni : MonoBehaviour {
             Debug.Log("success");
             score.ShowScore();
             audio.PlayOneShot(success);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag.CompareTo("ground") == 0)
+        {
+            gmr.die = true;
+
         }
     }
 
