@@ -6,6 +6,8 @@ public class BirdAni : MonoBehaviour {
     public GameObject scoreObject;
     Score score;
     public AudioClip success;
+    public AudioClip fail;
+    public Bird bird;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +23,28 @@ public class BirdAni : MonoBehaviour {
     {
         if (other.gameObject.tag.CompareTo("pipe") == 0)
         {
-            gmr.die = true;
+            if (gmr.die != true)
+            {
+                gmr.die = true;
+                audio.PlayOneShot(fail);
+            }
+        }
+        if (other.gameObject.tag.CompareTo("ground") == 0)
+        {
+            
+            if (gmr.die == true)
+            {
+                bird.velocity = Vector3.zero;
+                bird.GetComponent<Bird>().enabled = false;
+            }
+            else
+            {
+                gmr.die = true;
+                audio.PlayOneShot(fail);
+                bird.velocity = Vector3.zero;
+                bird.GetComponent<Bird>().enabled = false;
+
+            }
         }
     }
 
@@ -29,20 +52,15 @@ public class BirdAni : MonoBehaviour {
     {
         if (other.gameObject.tag.CompareTo("gap") == 0)
         {
-            Debug.Log("success");
-            score.ShowScore();
-            audio.PlayOneShot(success);
+            if (gmr.die != true)
+            {
+                Debug.Log("success");
+                score.ShowScore();
+                audio.PlayOneShot(success);
+            }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag.CompareTo("ground") == 0)
-        {
-            gmr.die = true;
-
-        }
-    }
 
     void OnGUI()
     {

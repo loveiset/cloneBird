@@ -2,12 +2,13 @@
 using System.Collections;
 
 public class Bird : MonoBehaviour {
-    Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
     public Vector3 gravity = Vector3.zero;
     public Vector3 flyVelocity = Vector3.zero;
     public float maxSpeed = 20f;
     bool isFly = false;
     public Animator bird;
+    public AudioClip fly;
 
     public GameManager gmr;
     
@@ -24,6 +25,7 @@ public class Bird : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             isFly = true;
+            audio.PlayOneShot(fly);
         }
 	}
 
@@ -32,10 +34,6 @@ public class Bird : MonoBehaviour {
         if (gmr.isStart)
         {
             bird.SetTrigger("start");
-            if (gmr.die)
-            {
-                bird.SetTrigger("die");
-            }
 
             velocity += gravity * Time.deltaTime;
             transform.position += velocity * Time.deltaTime;
@@ -50,8 +48,15 @@ public class Bird : MonoBehaviour {
             float angle = 10;
             if (velocity.y < -3f)
             {
-                angle = Mathf.Lerp(10, -90, -(3 + velocity.y) / 10);
-                //Debug.Log(angle);
+                if (gmr.die)
+                {
+                    angle = -90;
+                }
+                else
+                {
+                    angle = Mathf.Lerp(10, -90, -(3 + velocity.y) / 10);
+                    //Debug.Log(angle);
+                }
             }
             transform.localRotation = Quaternion.Euler(0, 0, angle);
         }
