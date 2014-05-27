@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Score : MonoBehaviour {
     public int score = 0;
     public int hisScore = 0;
+    public GameManager gmr;
+
     List<int> numbersToShow = new List<int>();
     [SerializeField]
     Sprite[] scorePic;
@@ -50,7 +52,7 @@ public class Score : MonoBehaviour {
         }
     }
 
-    void Reset()
+    public void Reset()
     {
         for (int i = 0; i < showSprites.Length; i++)
         {
@@ -62,12 +64,11 @@ public class Score : MonoBehaviour {
     {
         AddScore();
         Reset();
+
         DividedNumber(score);
         for (int i = 0; i < numbersToShow.Count; i++)
         {
             showSprites[i].sprite = scorePic[numbersToShow[i]];
-            //Debug.Log(scorePic[numbersToShow[i]]);
-            //Debug.Log(showSprites[i]);
         }
     }
 	

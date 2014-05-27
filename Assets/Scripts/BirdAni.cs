@@ -23,6 +23,7 @@ public class BirdAni : MonoBehaviour {
     {
         if (other.gameObject.tag.CompareTo("pipe") == 0)
         {
+            score.Reset();
             if (gmr.die != true)
             {
                 gmr.die = true;
@@ -31,6 +32,7 @@ public class BirdAni : MonoBehaviour {
         }
         if (other.gameObject.tag.CompareTo("ground") == 0)
         {
+            score.Reset();
             
             if (gmr.die == true)
             {
