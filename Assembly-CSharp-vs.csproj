@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bird.cs" />
      <Compile Include="Assets\Scripts\BirdAni.cs" />
+     <Compile Include="Assets\Scripts\FinalScore.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\Ground.cs" />

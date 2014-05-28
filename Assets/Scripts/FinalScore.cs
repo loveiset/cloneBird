@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Score : MonoBehaviour {
-    public int score = 0;
-    public int hisScore = 0;
-    public GameManager gmr;
+public class FinalScore : MonoBehaviour {
+    public Score score;
+    int tempNumber = 0;
+    double showTimeScale = 0.05f;
 
+    bool hasReachedMax = false;
     List<int> numbersToShow = new List<int>();
     [SerializeField]
     Sprite[] scorePic;
@@ -14,25 +15,15 @@ public class Score : MonoBehaviour {
     GameObject[] scorePosition;
     SpriteRenderer[] showSprites = new SpriteRenderer[4];
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
-        score = 80;
         for (int i = 0; i < scorePosition.Length; i++)
         {
             showSprites[i] = scorePosition[i].GetComponent<SpriteRenderer>();
-            //Debug.Log(scorePosition[i].GetComponent<SpriteRenderer>());
-        }
-	}
-
-    void AddScore()
-    {
-        score++;
-        if (score >= hisScore)
-        {
-            hisScore = score;
         }
     }
+
 
     void DividedNumber(int number)
     {
@@ -62,19 +53,52 @@ public class Score : MonoBehaviour {
 
     public void ShowScore()
     {
-        AddScore();
         Reset();
+        DividedNumber(tempNumber);
 
-        DividedNumber(score);
         for (int i = 0; i < numbersToShow.Count; i++)
         {
             showSprites[i].sprite = scorePic[numbersToShow[i]];
         }
     }
-	
-	// Update is called once per frame
-	void Update () 
+
+    void IncreseNumber( )
     {
-        
-	}
+        int temp = 0;
+        if (score.score <= 9)
+        {
+            tempNumber++;
+        }
+        else if(9 < score.score && score.score <= 19)
+        {
+            tempNumber += Random.Range(1, 3);
+        }
+        else
+        {
+            temp = score.score / 10;
+            tempNumber += Random.Range(temp - 1, temp + 2);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        showTimeScale -= Time.deltaTime;
+        if (showTimeScale < 0)
+        {
+            showTimeScale = 0.05f;
+
+            if (hasReachedMax == false)
+            {
+                Debug.Log(tempNumber);
+                IncreseNumber();
+                if (tempNumber >= score.score)
+                {
+                    hasReachedMax = true;
+                    tempNumber = score.score;
+                }
+                ShowScore();
+            }
+        }
+    }
 }
