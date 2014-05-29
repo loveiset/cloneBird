@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class FinalScore : MonoBehaviour {
-    public Score score;
     int tempNumber = 0;
-    double showTimeScale = 0.05f;
+    double showTimeScale = 0.08f;
 
-    bool hasReachedMax = false;
+    public GameManager gmr;
     List<int> numbersToShow = new List<int>();
     [SerializeField]
     Sprite[] scorePic;
@@ -65,17 +64,17 @@ public class FinalScore : MonoBehaviour {
     void IncreseNumber( )
     {
         int temp = 0;
-        if (score.score <= 9)
+        if (gmr.score <= 9)
         {
             tempNumber++;
         }
-        else if(9 < score.score && score.score <= 19)
+        else if(9 < gmr.score && gmr.score <= 19)
         {
             tempNumber += Random.Range(1, 3);
         }
         else
         {
-            temp = score.score / 10;
+            temp = gmr.score / 10;
             tempNumber += Random.Range(temp - 1, temp + 2);
         }
     }
@@ -86,16 +85,17 @@ public class FinalScore : MonoBehaviour {
         showTimeScale -= Time.deltaTime;
         if (showTimeScale < 0)
         {
-            showTimeScale = 0.05f;
+            showTimeScale = 0.08f;
 
-            if (hasReachedMax == false)
+            if (gmr.hasReachedMax == false)
             {
-                Debug.Log(tempNumber);
                 IncreseNumber();
-                if (tempNumber >= score.score)
+
+                if (tempNumber >= gmr.score)
                 {
-                    hasReachedMax = true;
-                    tempNumber = score.score;
+                    Debug.Log("hasreachedmax");
+                    gmr.hasReachedMax = true;
+                    tempNumber = gmr.score;
                 }
                 ShowScore();
             }

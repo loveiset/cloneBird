@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Score : MonoBehaviour {
+public class BestScore : MonoBehaviour {
+    public static int hisScore = 0;
     public GameManager gmr;
 
     List<int> numbersToShow = new List<int>();
@@ -12,24 +13,16 @@ public class Score : MonoBehaviour {
     GameObject[] scorePosition;
     SpriteRenderer[] showSprites = new SpriteRenderer[4];
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
-        gmr.score = 80;
         for (int i = 0; i < scorePosition.Length; i++)
         {
             showSprites[i] = scorePosition[i].GetComponent<SpriteRenderer>();
         }
-	}
-
-    void AddScore()
-    {
-        gmr.score++;
-        if (gmr.score >= gmr.hisScore)
-        {
-            gmr.hisScore = gmr.score;
-        }
+        ShowScore();
     }
+
 
     void DividedNumber(int number)
     {
@@ -59,19 +52,30 @@ public class Score : MonoBehaviour {
 
     public void ShowScore()
     {
-        AddScore();
         Reset();
+        DividedNumber(hisScore);
 
-        DividedNumber(gmr.score);
         for (int i = 0; i < numbersToShow.Count; i++)
         {
             showSprites[i].sprite = scorePic[numbersToShow[i]];
         }
     }
+
+	// Use this for initialization
 	
 	// Update is called once per frame
-	void Update () 
+    void Update()
     {
-        
-	}
+
+        if (hisScore < gmr.hisScore)
+        {
+
+            hisScore = gmr.hisScore;
+        }
+        if (gmr.hasReachedMax == true)
+        {
+            ShowScore();
+        }
+
+    }
 }
