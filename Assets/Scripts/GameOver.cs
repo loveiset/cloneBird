@@ -8,7 +8,6 @@ public class GameOver : MonoBehaviour {
     GameObject continueGame;
     GameObject share;
     SpriteRenderer medal;
-    GameObject showNew;
     [SerializeField]
     Sprite[] medalsToShow;
     
@@ -21,7 +20,6 @@ public class GameOver : MonoBehaviour {
         continueGame = transform.FindChild("scorepanel/continue").gameObject;
         share = transform.FindChild("scorepanel/share").gameObject;
         medal = transform.FindChild("scorepanel/medal").gameObject.GetComponent<SpriteRenderer>();
-        showNew = transform.FindChild("scorepanel/new").gameObject;
 	}
 
     void GameMedal()

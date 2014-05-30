@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class BestScore : MonoBehaviour {
     public static int hisScore = 0;
     public GameManager gmr;
+    public GameObject showNew;
+    bool isNew = false;
 
     List<int> numbersToShow = new List<int>();
     [SerializeField]
@@ -69,12 +71,16 @@ public class BestScore : MonoBehaviour {
 
         if (hisScore < gmr.hisScore)
         {
-
+            isNew = true;
             hisScore = gmr.hisScore;
         }
         if (gmr.hasReachedMax == true)
         {
             ShowScore();
+            if (isNew)
+            {
+                showNew.SetActive(true);
+            }
         }
 
     }
