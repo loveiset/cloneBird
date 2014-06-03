@@ -63,18 +63,6 @@ public class BirdAni : MonoBehaviour {
         }
     }
 
-
-    void OnGUI()
-    {
-        if (gmr.die==true)
-        {
-            if (GUI.Button(new Rect(50, 50, 100, 50), "play again"))
-            {
-                Application.LoadLevel(Application.loadedLevel);
-            }
-        }
-    }
-
     void FixedUpdate()
     {
         

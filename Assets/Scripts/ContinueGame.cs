@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ContinueGame : MonoBehaviour {
+    public AudioClip startSound;
 
 	// Use this for initialization
 	void Start () {
@@ -12,4 +13,9 @@ public class ContinueGame : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnMouseDown()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }

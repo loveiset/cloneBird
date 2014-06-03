@@ -15,7 +15,7 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        gmr.score = 80;
+        gmr.score = 0;
         for (int i = 0; i < scorePosition.Length; i++)
         {
             showSprites[i] = scorePosition[i].GetComponent<SpriteRenderer>();

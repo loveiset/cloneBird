@@ -22,6 +22,8 @@ public class BestScore : MonoBehaviour {
         {
             showSprites[i] = scorePosition[i].GetComponent<SpriteRenderer>();
         }
+        
+        hisScore = PlayerPrefs.GetInt("hisScore");
         ShowScore();
     }
 
@@ -73,6 +75,7 @@ public class BestScore : MonoBehaviour {
         {
             isNew = true;
             hisScore = gmr.hisScore;
+            PlayerPrefs.SetInt("hisScore", hisScore);
         }
         if (gmr.hasReachedMax == true)
         {

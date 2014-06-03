@@ -24,9 +24,21 @@ public class GameOver : MonoBehaviour {
 
     void GameMedal()
     {
-        if (gmr.score >= 80 && gmr.score < 90)
+        if (gmr.score >= 10 && gmr.score < 19)
         {
             medal.sprite = medalsToShow[0];
+        }
+        else if (gmr.score >= 20 && gmr.score < 30)
+        {
+            medal.sprite = medalsToShow[1];
+        }
+        else if (gmr.score >= 30 && gmr.score < 40)
+        {
+            medal.sprite = medalsToShow[2];
+        }
+        else if (gmr.score >= 40)
+        {
+            medal.sprite = medalsToShow[3];
         }
     }
 
